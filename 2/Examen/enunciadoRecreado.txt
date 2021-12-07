@@ -1,0 +1,81 @@
+Examen 2 PL Algoritmia // Tema 2: Recursividad. 5/11/21. // Alejandro Rodríguez López. (Enunciado Reescrito)
+
+Función recursiva:
+
+bool iExamPL4B (A[1..n][1...m]: matriz enteros, n: entero, m: entero, v: entero, k: entero) {
+    caso
+        k=1 ==> retorna AuxExamPL4B(A, n, m, v, k);
+        k>1 ==> retorna iExamPL4B(A, n, m, v, k-1) AND AuxExamPL4B(A, n, m, v, k);
+    fincaso
+}
+
+Fucnión Auxiliar:
+
+bool AuxExamPL4B (A[1...n][1...m]: matriz enteros, n: entero, m: entero, v: entero, k: entero) retorna (b: booleano)
+R={"El ultimo elem de cada columna es el número de elementos de esa fila inferiores estrictamente a v"}
+
+Ejemplo:
+Matriz: 8   7   9   0
+        4   7   1   2
+        1   2   1   4
+v = 6;
+
+Matriz retornará FALSO (0) porque la fila 3 (1  2   1   4) debería tener 4 elementos menores que v (6).
+1 < 6 ==> cont = 1
+2 < 6 ==> cont = 2
+1 < 6 ==> cont = 3
+
+3!=4 ==> FALSO (0)
+
+Ejemplo2 -no incluido en el examen, hecho por mí-:
+Matriz: 8   7   9   0
+        4   7   1   2
+        1   2   1   3
+v = 6;
+
+Matriz retornará VERDADERO (1) porque todas las filas tienen el M[fila][4] elementos menores estrictamente que v (6).
+    Fila 1 (8   7   9   0)
+        8 > 6 ==> cont = 0
+        7 > 6 ==> cont = 0
+        9 > 6 ==> cont = 0
+
+        0==0 ==> VERDADERO (1)
+
+    Fila 2 (4   7   1   2)
+        4 < 6 ==> cont = 1
+        7 > 6 ==> cont = 1
+        1 < 6 ==> cont = 2
+
+        2==2 ==> VERDADERO (1)
+
+    Fila 3 (1   2   1   3)
+        1 < 6 ==> cont = 1
+        2 < 6 ==> cont = 2
+        1 < 6 ==> cont = 3
+
+        3==3 ==> VERDADERO (1)
+
+Retorno final: VERDADERO (1)
+
+Ejercicio 1 (15%): identificar cada "parte" de la función recursiva
+    Bnt(x)  -->
+    Bt(x)   -->
+    Triv(x) -->
+    x       -->
+    s(x)    -->
+    s-1(x)  -->
+    (...)
+
+Ejercicio 2 (15%): Escribir la pila de llamadas para la matriz 1 y v=6:
+    Matriz1: 8   7   9   0
+             4   7   1   2
+             1   2   1   4
+            
+    1)      A = Matriz1, n = 3, m = 4, v = 6, k = 3
+    2)      A = Matriz1, n = 3, m = 4, v = 6, k = 2
+    3)      A = Matriz1, n = 3, m = 4, v = 6,
+    (...)
+    n-1)    b = 
+    n)      b = 
+
+Ejercicio 3 (70%): Escribir la función recursiva en Visual Studio Code, la Auxiliar y la correspondiente transformación a iterativo.

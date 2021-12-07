@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+E:\EPI\2\1\Algoritmia\PL\1\PL1\.metadata\.plugins\org.eclipse.jdt.core

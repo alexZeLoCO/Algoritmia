@@ -1,0 +1,30 @@
+Simple y no final ==> 2 bucles
+	x=xini;
+	
+	//Bucle omitible en algunos casos
+	while (x!=xTriv) {
+		x=s(x);
+	}
+	
+	y = Triv(x);
+	
+	while (x!=xini) {
+		x=s-1(x);
+		y = c(x, y);
+	}
+	
+	return y;
+	
+Simple y no final sin s-1(x);
+	//Almacenar valores de x durante el descenso en vector, recuperar en la vuelta.
+
+Simple y final ==> Un solo bucle
+	x=xini;
+	
+	//Bucle omitible en algunos casos
+	while (x!=xTriv) {
+		x = s(x);
+	}
+	
+	return Triv(x);
+	
