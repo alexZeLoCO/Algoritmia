@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-int dinamica (int ,int ,int**);
+void dinamica (int ,int ,int**);
 void mostrar (int **, int, int);
 void backtracking (int, int, int**, int, int*, int*, int*);
+bool DyV (int*, int, int);
 
 int main () {
+
     int c = 5;
     int n = 3;
     int ** a;
@@ -29,8 +32,10 @@ int main () {
         }
     }
     
-    //dinamica(c, n, a);
+    printf("///ALGORITMO DINAMICA///\n");
+    dinamica(c, n, a);
 
+    printf("\n\n///ALGORITMO BACKTRACKING///\n");
     int* x;
     x = (int*) malloc (c * sizeof(int));
 
@@ -44,6 +49,15 @@ int main () {
     for (int i = 0; i<c; i++) {
         printf("%d\t", x_mejor[i]);
     }
+    printf("\n");
+    
+
+    printf("\n///ALGORITMO DIVIDE Y VENCERAS///\n");
+    int vectorF [5] = {3, 7, 12, 3, 4};
+    int vectorT [5] = {3, 6, 5, 24, 12};
+    printf("Existen al menos 2 elementos consecutivos en el vector tales que uno es el doble del otro: %d\n", DyV(vectorT, 0, 5));
+    printf("Existen al menos 2 elementos consecutivos en el vector tales que uno es el doble del otro: %d\n", DyV(vectorF, 0, 5));
+
 }
 
 void mostrar (int ** m , int f, int c) {
@@ -128,7 +142,7 @@ int valor (int** a, int c, int * x) {
 }
 
 /**
- * @brief Retornará el resultado de Backtracking
+ * @brief Colocará en x_mejor la sucesión de decisiones óptima para el problema presentado
  * 
  * @param c Filas
  * @param n Columnas
@@ -153,7 +167,6 @@ void backtracking (int c, int n, int ** a, int k, int* x, int* x_mejor, int *v_m
         if (k==c){    //si solución
             aux=valor(a, c, x); // funcion objetivo
             if (aux > *v_mejor){        //si es mejor que el anterior
-                printf("Actualización: %d > %d\n", aux, *v_mejor);
                 *v_mejor=aux;
                 //opcion 1
                 //for(i=1;i<=n;i++)
@@ -163,13 +176,10 @@ void backtracking (int c, int n, int ** a, int k, int* x, int* x_mejor, int *v_m
                 //memcpy copia los primeros n bytes del area de memoria apuntada por
                 //s2 al area de memoria apuntada por s1
                 memcpy(x_mejor,x,c*sizeof(int));
-            } else {
-                printf("%d < %d\n", aux, *v_mejor);
             }
         }
             //si no solución y correcto
         if (k<c) {
-            printf("v_mejor: %d\n", *v_mejor);
             backtracking(c, n, a, k+1, x, x_mejor, v_mejor);
         }
     }
@@ -179,10 +189,16 @@ void backtracking (int c, int n, int ** a, int k, int* x, int* x_mejor, int *v_m
  * @brief Retornará true si en el vector existen al menos dos elementos consecutivos tales que uno es el doble del otro
  * 
  * @param v Vector a evaluar
- * @param n Longitud del vector
+ * @param ini Posición inicial del vector a operar (0)
+ * @param fin Posición final del vector a operar (longitud)
  * @return true si existen al menos dos elementos consecutivos tales que uno sea el doble del otro
  * @return false no existen ningun par de elementos consecutivos tales que uno sea el doble del otro
  */
-bool DyV (int* v, int n) {
-//idk
+bool DyV (int* v, int ini, int fin) {
+
+    if (ini == fin) return false;
+    if (ini == 1+fin || fin == 1+ini) return (v[ini] == 2*v[fin] || v[fin] == 2*v[ini]);
+    else {
+        return (DyV(v,ini,(ini+fin)/2) || DyV(v,(ini+fin)/2+1,fin));
+        }
 }
